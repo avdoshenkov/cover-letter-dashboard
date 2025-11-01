@@ -8,7 +8,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
 import { type TCoverLetterFormInput } from '@/types/coverLetter';
-import { selectProgress, useCoverLetterStore } from '@/store/coverLetters';
+import { 
+  selectLettersCount, 
+  selectGoalCount, 
+  selectIsGoalReached, 
+  useCoverLetterStore 
+} from '@/store/coverLetters';
 
 const MAX_CHARACTERS = 1200;
 
@@ -34,7 +39,14 @@ export const GeneratorFormContainer = () => {
   const [generatedLetter, setGeneratedLetter] = useState<string>();
   const router = useRouter();
   const addLetter = useCoverLetterStore((state) => state.addLetter);
-  const progress = useCoverLetterStore(selectProgress);
+  const current = useCoverLetterStore(selectLettersCount);
+  const goal = useCoverLetterStore(selectGoalCount);
+  const reached = useCoverLetterStore(selectIsGoalReached);
+
+  const progress = useMemo(
+    () => ({ current, goal, reached }),
+    [current, goal, reached]
+  );
 
   const {
     register,

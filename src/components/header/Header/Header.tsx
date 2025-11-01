@@ -4,10 +4,17 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 import { HeaderProgress } from '../HeaderProgress';
 import { HomeIcon } from '@/components/common';
-import { selectProgress, useCoverLetterStore } from '@/store/coverLetters';
+import { 
+  selectLettersCount, 
+  selectGoalCount, 
+  selectIsGoalReached, 
+  useCoverLetterStore 
+} from '@/store/coverLetters';
 
 export const Header = () => {
-  const progress = useCoverLetterStore(selectProgress);
+  const current = useCoverLetterStore(selectLettersCount);
+  const goal = useCoverLetterStore(selectGoalCount);
+  const reached = useCoverLetterStore(selectIsGoalReached);
 
   return (
     <header className={styles.header}>
@@ -15,7 +22,7 @@ export const Header = () => {
         <span className={styles.logo}>CoverLetter</span>
         <span className={styles.tagline}>Craft compelling applications</span>
       </div>
-      <HeaderProgress current={progress.current} goal={progress.goal} reached={progress.reached} />
+      <HeaderProgress current={current} goal={goal} reached={reached} />
       <Link className={styles.homeLink} href="/">
         <HomeIcon />
         <span>Dashboard</span>

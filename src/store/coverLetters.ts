@@ -64,8 +64,8 @@ export const useCoverLetterStore = create<TCoverLetterState>()(
 
 export const selectLetters = (state: TCoverLetterState) => state.letters;
 export const selectGoalCount = (state: TCoverLetterState) => state.goalCount;
-export const selectProgress = (state: TCoverLetterState) => ({
-  current: state.letters.length,
-  goal: state.goalCount,
-  reached: state.letters.length >= state.goalCount
-});
+
+// Separate selectors to avoid creating new objects on each call
+export const selectLettersCount = (state: TCoverLetterState) => state.letters.length;
+export const selectIsGoalReached = (state: TCoverLetterState) => 
+  state.letters.length >= state.goalCount;
