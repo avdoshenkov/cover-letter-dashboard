@@ -11,3 +11,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 dist
+
+.idea
+.vscode
+.DS_Store
+.cursor
