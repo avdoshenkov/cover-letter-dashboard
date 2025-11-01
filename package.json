@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Cover letter generator dashboard application",
   "private": true,
+  "engines": {
+    "node": ">=22.9.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
