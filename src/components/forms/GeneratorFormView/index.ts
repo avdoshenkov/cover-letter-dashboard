@@ -1,0 +1,1 @@
+export { GeneratorFormView } from './GeneratorFormView';
