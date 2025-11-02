@@ -1,0 +1,42 @@
+{
+  "name": "cover-letter-dashboard",
+  "version": "1.0.0",
+  "description": "Cover letter generator dashboard application",
+  "private": true,
+  "engines": {
+    "node": ">=24.11.0",
+    "npm": ">=11.6.1"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "5.2.2",
+    "nanoid": "5.1.6",
+    "next": "16.0.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "7.66.0",
+    "zustand": "5.0.8",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "24.9.2",
+    "@types/react": "18.3.26",
+    "@types/react-dom": "18.3.7",
+    "autoprefixer": "10.4.21",
+    "eslint": "9.39.0",
+    "eslint-config-next": "16.0.1",
+    "jsdom": "27.1.0",
+    "postcss": "8.5.6",
+    "typescript": "5.9.3",
+    "vitest": "4.0.6"
+  }
+}
