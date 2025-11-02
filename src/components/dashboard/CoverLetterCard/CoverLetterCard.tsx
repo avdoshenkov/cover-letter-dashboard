@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './CoverLetterCard.module.css';
-import { type TCoverLetter } from '@/types/coverLetter';
+import { TCoverLetter } from '@/types/coverLetter';
 import { Button, CopyIcon, TrashIcon } from '@/components/common';
 
 type TCoverLetterCardProps = {

@@ -2,12 +2,12 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
-import { type TCoverLetterFormInput } from '@/types/coverLetter';
+import { TCoverLetterFormInput } from '@/types/coverLetter';
 import { 
   selectLettersCount, 
   selectGoalCount, 
@@ -53,14 +53,17 @@ export const GeneratorFormContainer = () => {
     handleSubmit,
     formState,
     reset,
-    watch
+    control
   } = useForm<TCoverLetterFormInput>({
     defaultValues,
     resolver: zodResolver(schema),
     mode: 'onSubmit'
   });
 
-  const additionalDetailsValue = watch('additionalDetails');
+  const additionalDetailsValue = useWatch({
+    control,
+    name: 'additionalDetails'
+  });
   const characterCount = additionalDetailsValue?.length ?? 0;
 
   const onSubmit = handleSubmit(

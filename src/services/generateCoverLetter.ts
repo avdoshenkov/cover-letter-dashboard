@@ -1,4 +1,4 @@
-import { type TCoverLetterFormInput } from '@/types/coverLetter';
+import { TCoverLetterFormInput } from '@/types/coverLetter';
 
 type TGenerateCoverLetterInput = TCoverLetterFormInput;
 

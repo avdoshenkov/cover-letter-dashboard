@@ -1,11 +1,11 @@
 'use client';
 
-import { type FormEventHandler } from 'react';
-import { type UseFormRegister } from 'react-hook-form';
+import { FormEventHandler } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { ArrowUpRightIcon, Button, CopyIcon, RotateCcwIcon, TextField } from '@/components/common';
 import { ProgressBanner } from '@/components/banner/ProgressBanner';
 import styles from './GeneratorFormView.module.css';
-import { type TCoverLetterFormInput } from '@/types/coverLetter';
+import { TCoverLetterFormInput } from '@/types/coverLetter';
 
 export type TGeneratorFormViewProps = {
   onSubmit: FormEventHandler<HTMLFormElement>;

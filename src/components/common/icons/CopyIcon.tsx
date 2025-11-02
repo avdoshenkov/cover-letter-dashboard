@@ -1,4 +1,4 @@
-import { type SVGProps } from 'react';
+import { SVGProps } from 'react';
 
 export const CopyIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg

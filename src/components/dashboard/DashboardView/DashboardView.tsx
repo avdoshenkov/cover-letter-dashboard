@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ProgressBanner } from '@/components/banner/ProgressBanner';
 import { CoverLetterCard } from '../CoverLetterCard';
 import styles from './DashboardView.module.css';
-import { type TCoverLetter } from '@/types/coverLetter';
+import { TCoverLetter } from '@/types/coverLetter';
 
 type TDashboardViewProps = {
   letters: TCoverLetter[];
