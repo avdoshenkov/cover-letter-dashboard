@@ -1,0 +1,28 @@
+{
+  "name": "Cover Letter Dashboard",
+  "short_name": "CL Dashboard",
+  "description": "Cover letter generator dashboard application",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-mask.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#099250",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
+
