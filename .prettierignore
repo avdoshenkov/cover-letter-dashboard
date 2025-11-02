@@ -1,0 +1,22 @@
+# Dependencies
+node_modules
+package-lock.json
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Env files
+.env
+.env.*
+
+# Misc
+*.log
+.DS_Store
+coverage
+
+# Generated files
+next-env.d.ts
+

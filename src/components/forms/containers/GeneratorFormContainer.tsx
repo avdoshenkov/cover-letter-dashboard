@@ -8,11 +8,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
-import { 
-  selectLettersCount, 
-  selectGoalCount, 
-  selectIsGoalReached, 
-  useCoverLetterStore 
+import {
+  selectLettersCount,
+  selectGoalCount,
+  selectIsGoalReached,
+  useCoverLetterStore
 } from '@/store/coverLetters';
 
 const MAX_CHARACTERS = 1200;
@@ -43,18 +43,9 @@ export const GeneratorFormContainer = () => {
   const goal = useCoverLetterStore(selectGoalCount);
   const reached = useCoverLetterStore(selectIsGoalReached);
 
-  const progress = useMemo(
-    () => ({ current, goal, reached }),
-    [current, goal, reached]
-  );
+  const progress = useMemo(() => ({ current, goal, reached }), [current, goal, reached]);
 
-  const {
-    register,
-    handleSubmit,
-    formState,
-    reset,
-    control
-  } = useForm<TCoverLetterFormInput>({
+  const { register, handleSubmit, formState, reset, control } = useForm<TCoverLetterFormInput>({
     defaultValues,
     resolver: zodResolver(schema),
     mode: 'onSubmit'
@@ -66,20 +57,20 @@ export const GeneratorFormContainer = () => {
   });
   const characterCount = additionalDetailsValue?.length ?? 0;
 
-  const onSubmit = handleSubmit(
-    async (values) => {
-      const payload: TCoverLetterFormInput = {
-        company: values.company.trim(),
-        jobTitle: values.jobTitle.trim(),
-        skills: values.skills.trim(),
-        additionalDetails: values.additionalDetails?.trim() ? values.additionalDetails.trim() : undefined
-      };
+  const onSubmit = handleSubmit(async (values) => {
+    const payload: TCoverLetterFormInput = {
+      company: values.company.trim(),
+      jobTitle: values.jobTitle.trim(),
+      skills: values.skills.trim(),
+      additionalDetails: values.additionalDetails?.trim()
+        ? values.additionalDetails.trim()
+        : undefined
+    };
 
-      const body = await generateCoverLetter(payload);
-      setGeneratedLetter(body);
-      addLetter(payload, body);
-    }
-  );
+    const body = await generateCoverLetter(payload);
+    setGeneratedLetter(body);
+    addLetter(payload, body);
+  });
 
   const handleCopyResult = useCallback(() => {
     if (!generatedLetter || typeof navigator === 'undefined') {
