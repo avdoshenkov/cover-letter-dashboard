@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Header.module.css';
 import { HeaderProgress } from '../HeaderProgress';
 import { HomeIcon } from '@/components/common';
@@ -19,13 +20,11 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.brand}>
-        <span className={styles.logo}>CoverLetter</span>
-        <span className={styles.tagline}>Craft compelling applications</span>
+        <Image src="/img/logo.svg" loading="eager" alt="Alt + Shift Logo" width={179} height={48} />
       </div>
-      <HeaderProgress current={current} goal={goal} reached={reached} />
+      <HeaderProgress current={3} goal={goal} reached={reached} />
       <Link className={styles.homeLink} href="/">
         <HomeIcon />
-        <span>Dashboard</span>
       </Link>
     </header>
   );

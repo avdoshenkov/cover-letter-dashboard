@@ -1,12 +1,15 @@
 :root {
-  --color-background: #ffffff;
+  /* Colors */
+  --color-white: #ffffff;
+  --color-black: #101828;
+  --color-background: var(--color-white);
   --color-surface: #16161d;
   --color-surface-alt: #1f1f29;
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border: #d0d5dd;
   --color-border-strong: rgba(255, 255, 255, 0.16);
-  --color-text-primary: #f5f5fb;
-  --color-text-secondary: rgba(245, 245, 251, 0.72);
-  --color-text-muted: rgba(245, 245, 251, 0.52);
+  --color-text-primary: var(--color-black);
+  --color-text-secondary: #344054;
+  --color-text-muted: #667085;
   --color-accent: #7f5af0;
   --color-accent-strong: #6b46f2;
   --color-success: #087443;
@@ -26,6 +29,7 @@
   --spacing-sm: 16px;
   --spacing-xs: 12px;
   --spacing-xxs: 8px;
+  /* Font */
   --font-family-base: var(
     --font-fixel,
     'Fixel',

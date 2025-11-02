@@ -1,20 +1,16 @@
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   display: flex;
+  gap: var(--spacing-md);
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-md) var(--spacing-xl);
-  background: rgba(11, 11, 15, 0.8);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .brand {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-right: auto;
 }
 
 .logo {
@@ -34,20 +30,14 @@
 .homeLink {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   color: var(--color-text-secondary);
-  font-size: 0.875rem;
-  border: 1px solid transparent;
-  padding: 6px 12px;
-  border-radius: var(--radius-small);
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
 }
 
 .homeLink:hover {
   color: var(--color-text-primary);
-  border-color: var(--color-border);
 }
 
 @media (max-width: 768px) {
