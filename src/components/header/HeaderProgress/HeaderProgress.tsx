@@ -17,9 +17,7 @@ export const HeaderProgress = ({ current, goal, reached }: THeaderProgressProps)
     <div className={styles.progress}>
       <span className={styles.label}>{label}</span>
       {reached ? (
-        <span className={styles.icon} aria-label="Goal achieved">
-          <CheckIcon />
-        </span>
+        <CheckIcon />
       ) : (
         <div className={styles.dots} aria-hidden>
           {Array.from({ length: goal }).map((_, index) => (

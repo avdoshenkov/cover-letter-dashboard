@@ -22,7 +22,7 @@ export const Header = () => {
       <div className={styles.brand}>
         <Image src="/img/logo.svg" loading="eager" alt="Alt + Shift Logo" width={179} height={48} />
       </div>
-      <HeaderProgress current={3} goal={goal} reached={reached} />
+      <HeaderProgress current={current} goal={goal} reached={reached} />
       <Link className={styles.homeLink} href="/">
         <HomeIcon />
       </Link>
