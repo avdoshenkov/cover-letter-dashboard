@@ -9,7 +9,7 @@
 .previewCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-md);
   padding: var(--spacing-md);
   background: var(--color-surface-alt);
   min-height: 280px;

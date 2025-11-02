@@ -1,6 +1,6 @@
 .banner {
   background: var(--color-success-soft);
-  border-radius: var(--radius-large);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   display: flex;
   justify-content: center;
