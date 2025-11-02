@@ -1,6 +1,6 @@
 'use client';
 
-import { type PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import './globals.css';
 import { fixel } from './fonts';
 import { Header } from '@/components/header/Header';

@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 import { nanoid } from 'nanoid';
-import { type TCoverLetter, type TCoverLetterFormInput } from '@/types/coverLetter';
+import { TCoverLetter, TCoverLetterFormInput } from '@/types/coverLetter';
 
 const STORAGE_KEY = 'cover-letter-dashboard';
 const GOAL_COUNT = 5;
