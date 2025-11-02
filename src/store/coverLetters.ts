@@ -67,5 +67,5 @@ export const selectGoalCount = (state: TCoverLetterState) => state.goalCount;
 
 // Separate selectors to avoid creating new objects on each call
 export const selectLettersCount = (state: TCoverLetterState) => state.letters.length;
-export const selectIsGoalReached = (state: TCoverLetterState) => 
+export const selectIsGoalReached = (state: TCoverLetterState) =>
   state.letters.length >= state.goalCount;

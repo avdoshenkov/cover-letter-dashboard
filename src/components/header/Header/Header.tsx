@@ -4,11 +4,11 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 import { HeaderProgress } from '../HeaderProgress';
 import { HomeIcon } from '@/components/common';
-import { 
-  selectLettersCount, 
-  selectGoalCount, 
-  selectIsGoalReached, 
-  useCoverLetterStore 
+import {
+  selectLettersCount,
+  selectGoalCount,
+  selectIsGoalReached,
+  useCoverLetterStore
 } from '@/store/coverLetters';
 
 export const Header = () => {

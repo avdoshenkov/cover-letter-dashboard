@@ -21,6 +21,18 @@ A Next.js application for generating, storing, and managing cover letters direct
    ```bash
    npm test
    ```
+5. **Format code with Prettier**
+   ```bash
+   npm run format
+   ```
+6. **Check code formatting**
+   ```bash
+   npm run format:check
+   ```
+7. **Run linter**
+   ```bash
+   npm run lint
+   ```
 
 ## Features
 
@@ -32,6 +44,15 @@ A Next.js application for generating, storing, and managing cover letters direct
 - Persistent storage using Zustand with `localStorage` to restore letters per browser.
 - Responsive layouts for desktop and mobile breakpoints.
 - Vitest + React Testing Library setup for future component testing.
+
+## Code Quality
+
+This project uses several tools to maintain code quality:
+
+- **ESLint**: Configured with Next.js recommended rules and React Compiler compatibility
+- **Prettier**: Automated code formatting with consistent style
+- **lint-staged**: Runs linters and formatters on staged files before commit
+- **Husky**: Git hooks to enforce code quality checks
 
 ## Environment Variables
 

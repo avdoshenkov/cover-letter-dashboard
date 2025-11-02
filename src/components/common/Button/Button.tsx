@@ -75,7 +75,7 @@ export const Button = ({
 
   const endIcon = !loading && icon && iconPlacement === 'end' ? renderIcon(icon) : null;
 
-  const labelContent = loading ? loadingText ?? children : children;
+  const labelContent = loading ? (loadingText ?? children) : children;
 
   return (
     <button

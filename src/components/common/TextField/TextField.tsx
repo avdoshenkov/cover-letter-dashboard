@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, type TextareaHTMLAttributes, type InputHTMLAttributes, type ForwardedRef } from 'react';
+import { forwardRef, TextareaHTMLAttributes, InputHTMLAttributes, ForwardedRef } from 'react';
 import styles from './TextField.module.css';
 
 type TBaseProps = {
@@ -27,7 +27,11 @@ const TextFieldComponent = (
   <label className={styles.field}>
     <div className={styles.labelRow}>
       <span className={styles.label}>{label}</span>
-      {counter ? <span className={styles.counter}>{counter}</span> : helper ? <span className={styles.helper}>{helper}</span> : null}
+      {counter ? (
+        <span className={styles.counter}>{counter}</span>
+      ) : helper ? (
+        <span className={styles.helper}>{helper}</span>
+      ) : null}
     </div>
     {textarea ? (
       <textarea
@@ -48,4 +52,6 @@ const TextFieldComponent = (
 
 TextFieldComponent.displayName = 'TextField';
 
-export const TextField = forwardRef<HTMLInputElement | HTMLTextAreaElement, TTextFieldProps>(TextFieldComponent);
+export const TextField = forwardRef<HTMLInputElement | HTMLTextAreaElement, TTextFieldProps>(
+  TextFieldComponent
+);

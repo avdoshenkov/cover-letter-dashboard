@@ -40,7 +40,9 @@
   border: 1px solid transparent;
   padding: 6px 12px;
   border-radius: var(--radius-small);
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .homeLink:hover {
@@ -55,5 +57,4 @@
     align-items: flex-start;
     gap: var(--spacing-sm);
   }
-
 }

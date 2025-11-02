@@ -3,12 +3,12 @@
 import { useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { DashboardView } from '../DashboardView';
-import { 
-  selectLetters, 
-  selectLettersCount, 
-  selectGoalCount, 
-  selectIsGoalReached, 
-  useCoverLetterStore 
+import {
+  selectLetters,
+  selectLettersCount,
+  selectGoalCount,
+  selectIsGoalReached,
+  useCoverLetterStore
 } from '@/store/coverLetters';
 
 type TClipboard = typeof navigator | undefined;
@@ -21,10 +21,7 @@ export const DashboardContainer = () => {
   const reached = useCoverLetterStore(selectIsGoalReached);
   const removeLetter = useCoverLetterStore((state) => state.removeLetter);
 
-  const progress = useMemo(
-    () => ({ current, goal, reached }),
-    [current, goal, reached]
-  );
+  const progress = useMemo(() => ({ current, goal, reached }), [current, goal, reached]);
 
   const handleCopy = useCallback(
     async (id: string) => {

@@ -120,7 +120,9 @@ export const GeneratorFormView = ({
           </Button>
         </>
       ) : (
-        <div className={styles.loadingState}>Fill in the form to generate a tailored cover letter.</div>
+        <div className={styles.loadingState}>
+          Fill in the form to generate a tailored cover letter.
+        </div>
       )}
     </section>
   </div>

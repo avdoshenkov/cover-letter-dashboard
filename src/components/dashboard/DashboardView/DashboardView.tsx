@@ -18,7 +18,13 @@ type TDashboardViewProps = {
   };
 };
 
-export const DashboardView = ({ letters, onCopy, onDelete, onCreate, progress }: TDashboardViewProps) => (
+export const DashboardView = ({
+  letters,
+  onCopy,
+  onDelete,
+  onCreate,
+  progress
+}: TDashboardViewProps) => (
   <div className={styles.wrapper}>
     <div className={styles.headerRow}>
       <h1 className={styles.title}>Your applications</h1>

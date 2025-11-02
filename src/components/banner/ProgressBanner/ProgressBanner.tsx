@@ -17,7 +17,13 @@ export const ProgressBanner = ({ current, goal, onCreate }: TProgressBannerProps
         <p className={styles.description}>
           Generate and send out couple more job applications today to get hired faster
         </p>
-        <Button type="button" size="md" icon={<PlusIcon />} onClick={onCreate} className={styles.cta}>
+        <Button
+          type="button"
+          size="md"
+          icon={<PlusIcon />}
+          onClick={onCreate}
+          className={styles.cta}
+        >
           Create new
         </Button>
         <div className={styles.progress}>
@@ -25,7 +31,9 @@ export const ProgressBanner = ({ current, goal, onCreate }: TProgressBannerProps
             {Array.from({ length: goal }).map((_, index) => (
               <div
                 key={index}
-                className={index < clampedCurrent ? `${styles.step} ${styles.stepActive}` : styles.step}
+                className={
+                  index < clampedCurrent ? `${styles.step} ${styles.stepActive}` : styles.step
+                }
               />
             ))}
           </div>
