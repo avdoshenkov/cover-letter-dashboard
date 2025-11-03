@@ -1,9 +1,10 @@
 .header {
+  composes: container from global;
   display: flex;
   gap: var(--spacing-md);
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding-block: var(--spacing-lg);
 }
 
 .brand {

@@ -51,6 +51,8 @@
   --line-height-wide: 1.55;
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
+  /* Layout */
+  --max-content-width: calc(1120px + var(--spacing-md) * 2);
 }
 
 @media (max-width: 768px) {
