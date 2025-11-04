@@ -21,10 +21,10 @@ type TTextAreaFieldProps = TBaseProps & {
 type TTextFieldProps = TInputFieldProps | TTextAreaFieldProps;
 
 const TextFieldComponent = (
-  { label, helper, error, counter, textarea, ...rest }: TTextFieldProps,
+  { label, helper, error, counter, textarea, className, ...rest }: TTextFieldProps,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
 ) => (
-  <label className={styles.field}>
+  <label className={`${styles.field} ${className}`}>
     <div className={styles.labelRow}>
       <span className={styles.label}>{label}</span>
       {counter ? (
