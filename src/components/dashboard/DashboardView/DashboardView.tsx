@@ -4,13 +4,14 @@ import { ProgressBanner } from '@/components/banner/ProgressBanner';
 import { CoverLetterCard } from '../CoverLetterCard';
 import styles from './DashboardView.module.css';
 import { TCoverLetter } from '@/types/coverLetter';
-import { Button, PlusIcon } from '@/components/common';
+import { Button, PlusIcon, PageHeader } from '@/components/common';
 
 type TDashboardViewProps = {
   letters: TCoverLetter[];
   onCopy: (id: string) => void;
   onDelete: (id: string) => void;
   onCreate: () => void;
+  onCardClick: (id: string) => void;
   progress: {
     current: number;
     goal: number;
@@ -23,22 +24,29 @@ export const DashboardView = ({
   onCopy,
   onDelete,
   onCreate,
+  onCardClick,
   progress
 }: TDashboardViewProps) => (
   <div className={styles.wrapper}>
-    <div className={styles.headerRow}>
-      <h1 className={styles.title}>Applications</h1>
-      <div className={styles.actions}>
+    <PageHeader
+      title="Applications"
+      actions={
         <Button type="button" size="sm" icon={<PlusIcon />} onClick={onCreate}>
           Create new
         </Button>
-      </div>
-    </div>
+      }
+    />
 
     {letters.length === 0 ? null : (
       <div className={styles.grid}>
         {letters.map((letter) => (
-          <CoverLetterCard key={letter.id} letter={letter} onCopy={onCopy} onDelete={onDelete} />
+          <CoverLetterCard
+            key={letter.id}
+            letter={letter}
+            onCopy={onCopy}
+            onDelete={onDelete}
+            onClick={() => onCardClick(letter.id)}
+          />
         ))}
       </div>
     )}
