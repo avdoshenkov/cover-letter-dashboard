@@ -10,17 +10,17 @@
   --color-text-primary: var(--color-black);
   --color-text-secondary: #344054;
   --color-text-muted: #667085;
-  --color-accent: #7f5af0;
-  --color-accent-strong: #6b46f2;
+  --color-accent: #087443;
+  --color-accent-hover: #099250;
   --color-success: #087443;
   --color-success-soft: #edfcf2;
   --color-neutral-900: #101828;
   --color-danger: #f97066;
   --shadow-elevation: 0 16px 32px rgba(11, 11, 15, 0.6);
   /* Radius */
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
   /* Spacing */
   --spacing-xxl: 64px;
   --spacing-xl: 48px;
@@ -45,6 +45,11 @@
   --font-size-body-lg: 1.125rem;
   --font-size-body: 1rem;
   --font-size-small: 0.875rem;
+  /* Button-specific tokens */
+  --button-padding-sm-block: 10px;
+  --button-padding-sm-inline: 18px;
+  --button-padding-md-block: 16px;
+  --button-padding-md-inline: 28px;
   --line-height-tight: 1.1;
   --line-height-normal: 1.4;
   --line-height-relaxed: 1.6;

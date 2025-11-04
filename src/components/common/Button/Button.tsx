@@ -4,10 +4,11 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.css';
 import { SpinnerIcon } from '../icons';
 
-type TVariant = 'solid' | 'outline' | 'ghost';
+type TVariant = 'primary' | 'solid' | 'outline' | 'ghost';
 type TSize = 'sm' | 'md' | 'lg';
 
 const variantClassMap: Record<TVariant, string> = {
+  primary: styles.variantPrimary,
   solid: styles.variantSolid,
   outline: styles.variantOutline,
   ghost: styles.variantGhost
@@ -36,7 +37,7 @@ export const Button = ({
   children,
   icon,
   iconPlacement = 'start',
-  variant = 'solid',
+  variant = 'primary',
   size = 'md',
   fullWidth = false,
   loading = false,
