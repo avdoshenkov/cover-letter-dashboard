@@ -34,7 +34,7 @@ export const CopyButton = ({ textToCopy, disabled }: TCopyButtonProps) => {
       className={styles.button}
       type="button"
       onClick={handleCopy}
-      variant="outline"
+      variant="ghost"
       size="sm"
       iconPlacement="end"
       icon={copied ? <CheckIcon /> : <CopyIcon />}
