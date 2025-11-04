@@ -9,6 +9,7 @@
   --color-border-strong: rgba(255, 255, 255, 0.16);
   --color-text-primary: var(--color-black);
   --color-text-secondary: #344054;
+  --color-text-tertiary: #475467;
   --color-text-muted: #667085;
   --color-accent: #087443;
   --color-accent-hover: #099250;
@@ -17,6 +18,7 @@
   --color-neutral-900: #101828;
   --color-danger: #f97066;
   --color-border: #eaecf0;
+  --color-preview-background: #f2f4f7;
   --shadow-elevation: 0 16px 32px rgba(11, 11, 15, 0.6);
   /* Radius */
   --radius-lg: 12px;

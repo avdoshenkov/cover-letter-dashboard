@@ -1,4 +1,5 @@
 .button {
+  --icon-size: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7,7 +8,7 @@
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   cursor: pointer;
-  gap: 0.5rem;
+  gap: var(--spacing-xxs);
   padding: 0.5rem 1rem;
   background: transparent;
   color: var(--color-text-primary);
@@ -56,23 +57,32 @@
 .variantGhost {
   background: transparent;
   border-color: transparent;
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
+  padding: 0;
+
+  &.sizeSm,
+  &.sizeMd,
+  &.sizeLg {
+    padding: 0;
+  }
 }
 
 .variantGhost:hover:not(:disabled) {
-  color: var(--color-text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-tertiary);
+  opacity: 0.8;
 }
 
 .sizeSm {
   padding: var(--button-padding-sm-block) var(--button-padding-sm-inline);
   font-size: var(--font-size-body);
-  gap: var(--spacing-xxxs);
+  line-height: var(--line-height-wide);
+  gap: var(--spacing-xxs);
 }
 
 .sizeMd {
   padding: var(--button-padding-md-block) var(--button-padding-md-inline);
   font-size: var(--font-size-body-lg);
+  --icon-size: 24px;
 }
 
 .sizeLg {
@@ -98,11 +108,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 .label {
-  display: inline-flex;
-  align-items: center;
+  /* display: inline-flex;
+  align-items: center; */
 }
 
 .spinner {
