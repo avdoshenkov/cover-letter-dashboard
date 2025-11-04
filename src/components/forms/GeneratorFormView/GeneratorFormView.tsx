@@ -79,7 +79,7 @@ export const GeneratorFormView = ({
           <Button
             type="submit"
             loading={isSubmitting}
-            variant="solid"
+            variant="primary"
             size="lg"
             fullWidth
             iconPlacement="end"

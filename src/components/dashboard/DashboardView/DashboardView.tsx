@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { ProgressBanner } from '@/components/banner/ProgressBanner';
 import { CoverLetterCard } from '../CoverLetterCard';
 import styles from './DashboardView.module.css';
 import { TCoverLetter } from '@/types/coverLetter';
+import { Button, PlusIcon } from '@/components/common';
 
 type TDashboardViewProps = {
   letters: TCoverLetter[];
@@ -27,32 +27,24 @@ export const DashboardView = ({
 }: TDashboardViewProps) => (
   <div className={styles.wrapper}>
     <div className={styles.headerRow}>
-      <h1 className={styles.title}>Your applications</h1>
+      <h1 className={styles.title}>Applications</h1>
       <div className={styles.actions}>
-        <Link href="/new" className={styles.linkButton}>
-          Create new letter
-        </Link>
+        <Button type="button" size="sm" icon={<PlusIcon />} onClick={onCreate}>
+          Create new
+        </Button>
       </div>
     </div>
 
-    {!progress.reached ? (
-      <ProgressBanner current={progress.current} goal={progress.goal} onCreate={onCreate} />
-    ) : null}
-
-    {letters.length === 0 ? (
-      <section className={styles.empty}>
-        <h2 className={styles.emptyTitle}>No letters yet</h2>
-        <p>Start crafting personalised cover letters and track your progress right here.</p>
-        <Link href="/new" className={styles.linkButton}>
-          Generate your first letter
-        </Link>
-      </section>
-    ) : (
+    {letters.length === 0 ? null : (
       <div className={styles.grid}>
         {letters.map((letter) => (
           <CoverLetterCard key={letter.id} letter={letter} onCopy={onCopy} onDelete={onDelete} />
         ))}
       </div>
     )}
+
+    {!progress.reached ? (
+      <ProgressBanner current={progress.current} goal={progress.goal} onCreate={onCreate} />
+    ) : null}
   </div>
 );

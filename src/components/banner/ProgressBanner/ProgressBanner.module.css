@@ -1,14 +1,15 @@
 .banner {
   background: var(--color-success-soft);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xxl);
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-top: var(--spacing-sm);
 }
 
 .content {
-  max-width: 460px;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,29 +18,16 @@
 
 .title {
   font-size: var(--font-size-title);
-  line-height: var(--line-height-tight);
+  line-height: 1.2;
   font-weight: var(--font-weight-semibold);
-  color: var(--color-neutral-900);
+  margin: 0;
 }
 
 .description {
-  color: var(--color-neutral-900);
-  font-size: var(--font-size-body);
+  color: var(--color-text-muted);
+  margin: 0;
+  font-size: var(--font-size-body-lg);
   line-height: var(--line-height-relaxed);
-}
-
-.cta {
-  background: var(--color-success) !important;
-  border-color: transparent !important;
-  color: var(--color-success-soft) !important;
-}
-
-.cta:hover:not(:disabled) {
-  background: rgba(8, 116, 67, 0.88) !important;
-}
-
-.cta:focus-visible {
-  outline-color: rgba(8, 116, 67, 0.65) !important;
 }
 
 .progress {
@@ -47,6 +35,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-xxs);
+  margin-top: var(--spacing-sm);
 }
 
 .steps {
@@ -67,11 +56,9 @@
 }
 
 .count {
-  font-family: var(--font-family-base);
   font-size: var(--font-size-body-lg);
   line-height: var(--line-height-wide);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-neutral-900);
+  color: var(--color-text-muted);
 }
 
 @media (max-width: 768px) {

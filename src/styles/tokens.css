@@ -16,19 +16,21 @@
   --color-success-soft: #edfcf2;
   --color-neutral-900: #101828;
   --color-danger: #f97066;
+  --color-border: #eaecf0;
   --shadow-elevation: 0 16px 32px rgba(11, 11, 15, 0.6);
   /* Radius */
   --radius-lg: 12px;
   --radius-md: 8px;
   --radius-sm: 6px;
   /* Spacing */
-  --spacing-xxl: 64px;
+  --spacing-xxl: 54px;
   --spacing-xl: 48px;
   --spacing-lg: 32px;
   --spacing-md: 24px;
   --spacing-sm: 16px;
   --spacing-xs: 12px;
   --spacing-xxs: 8px;
+  --spacing-xxxs: 4px;
   /* Font */
   --font-family-base: var(
     --font-fixel,
@@ -39,8 +41,8 @@
     'Segoe UI',
     sans-serif
   );
-  --font-size-display: clamp(2.5rem, 3vw, 3.25rem);
-  --font-size-title: clamp(1.75rem, 2vw, 2.25rem);
+  --font-size-display: clamp(3rem, 3vw, 3.25rem);
+  --font-size-title: clamp(2.25rem, 2vw, 2.25rem);
   --font-size-subtitle: clamp(1.25rem, 1.75vw, 1.5rem);
   --font-size-body-lg: 1.125rem;
   --font-size-body: 1rem;
