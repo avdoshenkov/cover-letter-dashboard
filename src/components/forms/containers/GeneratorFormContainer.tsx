@@ -1,19 +1,13 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
-import {
-  selectLettersCount,
-  selectGoalCount,
-  selectIsGoalReached,
-  useCoverLetterStore
-} from '@/store/coverLetters';
+import { useCoverLetterStore } from '@/store/coverLetters';
 
 const MAX_CHARACTERS = 1200;
 
@@ -37,25 +31,40 @@ const defaultValues: TCoverLetterFormInput = {
 
 export const GeneratorFormContainer = () => {
   const [generatedLetter, setGeneratedLetter] = useState<string>();
-  const router = useRouter();
   const addLetter = useCoverLetterStore((state) => state.addLetter);
-  const current = useCoverLetterStore(selectLettersCount);
-  const goal = useCoverLetterStore(selectGoalCount);
-  const reached = useCoverLetterStore(selectIsGoalReached);
 
-  const progress = useMemo(() => ({ current, goal, reached }), [current, goal, reached]);
-
-  const { register, handleSubmit, formState, reset, control } = useForm<TCoverLetterFormInput>({
+  const { register, handleSubmit, formState, control } = useForm<TCoverLetterFormInput>({
     defaultValues,
     resolver: zodResolver(schema),
     mode: 'onSubmit'
   });
+
+  const jobTitle = useWatch({
+    control,
+    name: 'jobTitle'
+  });
+
+  const company = useWatch({
+    control,
+    name: 'company'
+  });
+  const isPlaceholderTitle = !jobTitle && !company;
 
   const additionalDetailsValue = useWatch({
     control,
     name: 'additionalDetails'
   });
   const characterCount = additionalDetailsValue?.length ?? 0;
+
+  const formTitle = useMemo(() => {
+    if (isPlaceholderTitle) {
+      return 'New application';
+    }
+    if (jobTitle && company) {
+      return `${jobTitle}, ${company}`;
+    }
+    return jobTitle || company;
+  }, [jobTitle, company, isPlaceholderTitle]);
 
   const onSubmit = handleSubmit(async (values) => {
     const payload: TCoverLetterFormInput = {
@@ -71,23 +80,6 @@ export const GeneratorFormContainer = () => {
     setGeneratedLetter(body);
     addLetter(payload, body);
   });
-
-  const handleCopyResult = useCallback(() => {
-    if (!generatedLetter || typeof navigator === 'undefined') {
-      return;
-    }
-
-    void navigator.clipboard.writeText(generatedLetter);
-  }, [generatedLetter]);
-
-  const handleReset = useCallback(() => {
-    reset(defaultValues);
-    setGeneratedLetter(undefined);
-  }, [reset]);
-
-  const handleCreate = useCallback(() => {
-    router.push('/new');
-  }, [router]);
 
   const errorMessages = useMemo(
     () => ({
@@ -106,12 +98,11 @@ export const GeneratorFormContainer = () => {
       errors={errorMessages}
       isSubmitting={formState.isSubmitting}
       generatedLetter={generatedLetter}
-      onCopyResult={handleCopyResult}
-      onReset={handleReset}
+      isPlaceholderTitle={isPlaceholderTitle}
       characterCount={characterCount}
       maxCharacters={MAX_CHARACTERS}
-      onCreate={handleCreate}
-      progress={progress}
+      formTitle={formTitle}
+      submitButtonText="Generate Now"
     />
   );
 };
