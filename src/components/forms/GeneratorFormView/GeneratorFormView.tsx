@@ -55,7 +55,7 @@ export const GeneratorFormView = ({
               />
               <TextField
                 className={styles.fullWidthField}
-                label="Key skills"
+                label="I am good at..."
                 placeholder="UX Research, Interface Design, Prototyping"
                 error={errors.skills}
                 {...register('skills')}

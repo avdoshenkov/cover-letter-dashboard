@@ -87,6 +87,6 @@
 .textarea {
   padding: var(--textarea-padding-y) var(--textarea-padding-x);
   border-radius: var(--radius-md);
-  resize: vertical;
+  resize: none;
   overflow-y: auto;
 }

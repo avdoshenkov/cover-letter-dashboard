@@ -25,6 +25,7 @@
   gap: var(--spacing-sm);
   background: var(--color-preview-background);
   color: var(--color-text-muted);
+  min-height: 400px;
 }
 
 .form {
@@ -45,6 +46,8 @@
 
 .previewBody {
   white-space: pre-line;
+  margin: 0;
+  font-family: var(--font-family-base);
 }
 
 .copyButton {
