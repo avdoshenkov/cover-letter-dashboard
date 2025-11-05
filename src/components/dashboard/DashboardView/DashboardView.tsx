@@ -1,6 +1,5 @@
 'use client';
 
-import { ProgressBanner } from '@/components/banner/ProgressBanner';
 import { CoverLetterCard } from '../CoverLetterCard';
 import styles from './DashboardView.module.css';
 import { TCoverLetter } from '@/types/coverLetter';
@@ -10,14 +9,9 @@ type TDashboardViewProps = {
   letters: TCoverLetter[];
   onDelete: (id: string) => void;
   onCreate: () => void;
-  progress: {
-    current: number;
-    goal: number;
-    reached: boolean;
-  };
 };
 
-export const DashboardView = ({ letters, onDelete, onCreate, progress }: TDashboardViewProps) => (
+export const DashboardView = ({ letters, onDelete, onCreate }: TDashboardViewProps) => (
   <div className={styles.wrapper}>
     <PageHeader
       title="Applications"
@@ -35,9 +29,5 @@ export const DashboardView = ({ letters, onDelete, onCreate, progress }: TDashbo
         ))}
       </div>
     )}
-
-    {!progress.reached ? (
-      <ProgressBanner current={progress.current} goal={progress.goal} onCreate={onCreate} />
-    ) : null}
   </div>
 );

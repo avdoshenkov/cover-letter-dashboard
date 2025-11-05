@@ -1,3 +1,7 @@
+.wrapper {
+  composes: container from global;
+}
+
 .banner {
   background: var(--color-success-soft);
   border-radius: var(--radius-lg);
@@ -5,7 +9,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: var(--spacing-sm);
+  margin-top: var(--spacing-xl);
 }
 
 .content {
