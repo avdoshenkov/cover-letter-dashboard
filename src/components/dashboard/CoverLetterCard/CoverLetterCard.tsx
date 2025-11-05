@@ -1,45 +1,24 @@
 'use client';
 
+import Link from 'next/link';
 import styles from './CoverLetterCard.module.css';
 import { TCoverLetter } from '@/types/coverLetter';
-import { Button, CopyIcon, TrashIcon } from '@/components/common';
+import { Button, CopyButton, TrashIcon } from '@/components/common';
 
 type TCoverLetterCardProps = {
   letter: TCoverLetter;
-  onCopy: (id: string) => void;
   onDelete: (id: string) => void;
 };
 
-export const CoverLetterCard = ({ letter, onCopy, onDelete }: TCoverLetterCardProps) => {
-  const formattedDate = new Date(letter.createdAt).toLocaleString(undefined, {
-    dateStyle: 'medium',
-    timeStyle: 'short'
-  });
-
+export const CoverLetterCard = ({ letter, onDelete }: TCoverLetterCardProps) => {
   return (
     <article className={styles.card}>
-      <div className={styles.header}>
-        <div>
-          <h3 className={styles.title}>{letter.jobTitle}</h3>
-          <p className={styles.meta}>
-            {letter.company} · {formattedDate}
-          </p>
-        </div>
-        <div className={styles.meta}>Skills: {letter.skills}</div>
-      </div>
-      <pre className={styles.body}>{letter.body}</pre>
+      <Link href={`/edit/${letter.id}`} className={styles.bodyLink}>
+        <pre className={styles.body}>{letter.body}</pre>
+      </Link>
       <div className={styles.actions}>
         <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          iconPlacement="end"
-          icon={<CopyIcon />}
-          onClick={() => onCopy(letter.id)}
-        >
-          Copy text
-        </Button>
-        <Button
+          className={styles.deleteButton}
           type="button"
           variant="ghost"
           size="sm"
@@ -48,6 +27,7 @@ export const CoverLetterCard = ({ letter, onCopy, onDelete }: TCoverLetterCardPr
         >
           Delete
         </Button>
+        <CopyButton textToCopy={letter.body} />
       </div>
     </article>
   );
