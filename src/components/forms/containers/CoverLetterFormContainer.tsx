@@ -3,29 +3,15 @@
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, useWatch } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
-import { generateCoverLetter } from '@/services/generateCoverLetter';
+import { generateCoverLetterAction } from '@/actions/generateCoverLetter';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
 import { selectLetterById, selectHasHydrated, useCoverLetterStore } from '@/store/coverLetters';
 import { Button } from '@/components/common';
 import { RepeatIcon } from '@/components/common/icons';
 import { usePreventNavigation } from './usePreventNavigation';
-
-const MAX_CHARACTERS = 1200;
-
-const schema = z.object({
-  company: z.string().min(1, 'Company is required'),
-  jobTitle: z.string().min(1, 'Job title is required'),
-  skills: z.string().min(1, 'Skills are required'),
-  additionalDetails: z
-    .string()
-    .max(MAX_CHARACTERS, 'Additional details must be 1200 characters or less')
-    .optional()
-    .or(z.literal('')),
-  body: z.string().optional()
-});
+import { coverLetterFormSchema, MAX_CHARACTERS } from '@/schemas/coverLetter';
 
 export type TCoverLetterFormContainerProps = {
   letterId?: string;
@@ -60,7 +46,7 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
   const { register, handleSubmit, formState, control, setValue, reset } =
     useForm<TCoverLetterFormInput>({
       defaultValues,
-      resolver: zodResolver(schema),
+      resolver: zodResolver(coverLetterFormSchema),
       mode: 'onSubmit'
     });
 
@@ -122,7 +108,15 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
       additionalDetails: values.additionalDetails?.trim() || undefined
     };
 
-    const body = await generateCoverLetter(payload);
+    const result = await generateCoverLetterAction(payload);
+
+    if (!result.success) {
+      console.error('Failed to generate cover letter:', result.error);
+      // TODO: Add error display to user
+      return;
+    }
+
+    const body = result.data;
     setValue('body', body);
 
     if (isEditMode && letterId) {
