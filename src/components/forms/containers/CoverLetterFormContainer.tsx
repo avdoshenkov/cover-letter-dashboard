@@ -123,7 +123,8 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
     if (isEditMode && letterId) {
       updateLetter(letterId, payload, body);
     } else {
-      addLetter(payload, body);
+      const newLetter = addLetter(payload, body);
+      router.push(`/edit/${newLetter.id}`);
     }
   });
 
