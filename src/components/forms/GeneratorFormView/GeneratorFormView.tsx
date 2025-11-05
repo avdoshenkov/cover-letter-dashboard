@@ -2,7 +2,7 @@
 
 import { FormEventHandler, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { CopyButton, PageHeader, TextField } from '@/components/common';
+import { CopyButton, LoadingCircle, PageHeader, TextField } from '@/components/common';
 import styles from './GeneratorFormView.module.css';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
 
@@ -77,19 +77,21 @@ export const GeneratorFormView = ({
         </section>
         <section className={styles.previewCard}>
           {isSubmitting ? (
-            <div className={styles.loadingState}>Crafting your personalised letter…</div>
-          ) : generatedLetter ? (
-            <>
-              <pre className={styles.previewBody}>{generatedLetter}</pre>
-            </>
+            <LoadingCircle />
           ) : (
-            <div className={styles.loadingState}>
-              Your personalized job application will appear here...
-            </div>
+            <>
+              {generatedLetter ? (
+                <pre className={styles.previewBody}>{generatedLetter}</pre>
+              ) : (
+                <div className={styles.loadingState}>
+                  Your personalized job application will appear here...
+                </div>
+              )}
+              <div className={styles.copyButton}>
+                <CopyButton textToCopy={generatedLetter ?? ''} disabled={!generatedLetter} />
+              </div>
+            </>
           )}
-          <div className={styles.copyButton}>
-            <CopyButton textToCopy={generatedLetter ?? ''} disabled={!generatedLetter} />
-          </div>
         </section>
       </div>
     </div>

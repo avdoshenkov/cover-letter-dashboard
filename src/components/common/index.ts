@@ -3,4 +3,5 @@ export { TextField } from './TextField';
 export { CopyButton, type TCopyButtonProps } from './CopyButton';
 export { CreateButton, type TCreateButtonProps } from './CreateButton';
 export { PageHeader, type TPageHeaderProps } from './PageHeader';
+export { LoadingCircle } from './LoadingCircle';
 export * from './icons';
