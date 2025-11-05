@@ -19,6 +19,10 @@
   outline-offset: 2px;
 }
 
+.button:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -31,30 +35,17 @@
   box-shadow: var(--shadow-button);
 }
 
-.variantPrimary:hover:not(:disabled) {
-  background: var(--color-accent-hover);
-}
-
 .variantSolid {
   background: var(--color-accent);
   color: var(--color-white);
   box-shadow: var(--shadow-button);
 }
 
-.variantSolid:hover:not(:disabled) {
-  background: var(--color-accent-hover);
-}
-
 .variantOutline {
   background: transparent;
-  border-color: var(--color-border-strong);
+  border-color: var(--color-input-border);
   color: var(--color-text-primary);
   box-shadow: var(--shadow-button);
-}
-
-.variantOutline:hover:not(:disabled) {
-  border-color: var(--color-text-primary);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .variantGhost {
@@ -68,11 +59,6 @@
   &.sizeLg {
     padding: 0;
   }
-}
-
-.variantGhost:hover:not(:disabled) {
-  color: var(--color-text-tertiary);
-  opacity: 0.8;
 }
 
 .sizeSm {
