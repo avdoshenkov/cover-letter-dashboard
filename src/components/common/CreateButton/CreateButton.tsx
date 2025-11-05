@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
 import { Button } from '../Button';
 import { PlusIcon } from '../icons';
 import { TCreateButtonProps } from './CreateButton.types';
