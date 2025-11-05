@@ -1,61 +1,92 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--spacing-xxs);
 }
 
 .labelRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--color-text-secondary);
-  font-size: 0.85rem;
 }
 
 .label {
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-label);
 }
 
 .helper {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
   color: var(--color-text-muted);
+}
+
+.counter {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-helper-text);
 }
 
 .input,
 .textarea {
   width: 100%;
-  padding: 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-  font-size: 1rem;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-input-border);
+  background: var(--color-input-bg);
+  color: var(--color-input-text);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-weight-regular);
+  box-shadow: var(--shadow-xs);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-input-placeholder);
+  font-weight: var(--font-weight-regular);
+}
+
 .input:focus,
 .textarea:focus {
   outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(127, 90, 240, 0.25);
+  border-color: var(--color-input-border-focus);
+  box-shadow:
+    var(--shadow-focus-ring) var(--color-focus-ring),
+    var(--shadow-xs);
 }
 
 .errorMessage {
-  color: var(--color-danger);
-  font-size: 0.8rem;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-error-text);
 }
 
 .errorState {
-  border-color: var(--color-danger);
+  border-color: var(--color-error-border);
+  box-shadow:
+    var(--shadow-focus-ring) var(--color-error-bg),
+    var(--shadow-xs);
 }
 
-.counter {
-  color: var(--color-text-muted);
-  font-size: 0.8rem;
+.errorState:focus {
+  border-color: var(--color-error-border);
+  box-shadow:
+    var(--shadow-focus-ring) var(--color-error-bg),
+    var(--shadow-xs);
 }
 
 .textarea {
-  min-height: 180px;
+  padding: var(--textarea-padding-y) var(--textarea-padding-x);
+  border-radius: var(--radius-md);
   resize: vertical;
+  overflow-y: auto;
 }

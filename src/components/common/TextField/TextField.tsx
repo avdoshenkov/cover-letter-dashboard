@@ -27,16 +27,13 @@ const TextFieldComponent = (
   <label className={`${styles.field} ${className}`}>
     <div className={styles.labelRow}>
       <span className={styles.label}>{label}</span>
-      {counter ? (
-        <span className={styles.counter}>{counter}</span>
-      ) : helper ? (
-        <span className={styles.helper}>{helper}</span>
-      ) : null}
+      {helper ? <span className={styles.helper}>{helper}</span> : null}
     </div>
     {textarea ? (
       <textarea
         ref={ref as ForwardedRef<HTMLTextAreaElement>}
         className={`${styles.textarea} ${error ? styles.errorState : ''}`.trim()}
+        rows={9}
         {...(rest as TextareaHTMLAttributes<HTMLTextAreaElement>)}
       />
     ) : (
@@ -46,6 +43,7 @@ const TextFieldComponent = (
         {...(rest as InputHTMLAttributes<HTMLInputElement>)}
       />
     )}
+    {counter ? <span className={styles.counter}>{counter}</span> : null}
     {error ? <span className={styles.errorMessage}>{error}</span> : null}
   </label>
 );

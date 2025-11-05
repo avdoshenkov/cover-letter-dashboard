@@ -19,6 +19,19 @@
   --color-danger: #f97066;
   --color-border: #eaecf0;
   --color-preview-background: #f2f4f7;
+  /* Input/Form colors */
+  --color-input-text: #101828;
+  --color-input-bg: #ffffff;
+  --color-input-placeholder: #667085;
+  --color-input-border: #d0d5dd;
+  --color-input-border-hover: #d0d5dd;
+  --color-input-border-focus: #73e2a3;
+  --color-label: #344054;
+  --color-helper-text: #475467;
+  --color-error-text: #f04438;
+  --color-error-border: #fda29b;
+  --color-error-bg: #fee4e2;
+  --color-focus-ring: #d3f8df;
   /* Shadows */
   --shadow-xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   --shadow-button: 0px 1px 2px 0px rgba(16, 24, 40, 0.051);
@@ -37,6 +50,11 @@
   --spacing-xs: 12px;
   --spacing-xxs: 8px;
   --spacing-xxxs: 4px;
+  /* Input/Form padding */
+  --input-padding-y: 0.5rem;
+  --input-padding-x: 0.75rem;
+  --textarea-padding-y: 0.75rem;
+  --textarea-padding-x: 0.875rem;
   /* Font */
   --font-family-base: var(
     --font-fixel,
@@ -50,19 +68,30 @@
   --font-size-display: clamp(3rem, 3vw, 3.25rem);
   --font-size-title: clamp(2.25rem, 2vw, 2.25rem);
   --font-size-subtitle: clamp(1.25rem, 1.75vw, 1.5rem);
-  --font-size-body-lg: 1.125rem;
-  --font-size-body: 1rem;
-  --font-size-small: 0.875rem;
+  --font-size-xl: 2.25rem;
+  --font-size-lg: 1.125rem;
+  --font-size-md: 1rem;
+  --font-size-sm: 0.875rem;
+  /* Legacy aliases */
+  --font-size-body-lg: var(--font-size-lg);
+  --font-size-body: var(--font-size-md);
+  --font-size-small: var(--font-size-sm);
   /* Button-specific tokens */
   --button-padding-sm-block: 10px;
   --button-padding-sm-inline: 18px;
   --button-padding-md-block: 16px;
   --button-padding-md-inline: 28px;
+  --line-height-xl: 2.75rem;
+  --line-height-lg: 1.75rem;
+  --line-height-md: 1.5rem;
+  --line-height-sm: 1.25rem;
+  /* Legacy aliases */
   --line-height-tight: 1.1;
   --line-height-normal: 1.4;
   --line-height-relaxed: 1.6;
   --line-height-wide: 1.55;
   --font-weight-regular: 400;
+  --font-weight-medium: 500;
   --font-weight-semibold: 600;
   /* Layout */
   --max-content-width: calc(1120px + var(--spacing-md) * 2);
