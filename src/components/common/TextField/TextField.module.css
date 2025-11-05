@@ -12,21 +12,21 @@
 
 .label {
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-sm);
   color: var(--color-label);
 }
 
 .helper {
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-sm);
   color: var(--color-text-muted);
 }
 
 .counter {
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-sm);
   color: var(--color-helper-text);
 }
@@ -65,7 +65,7 @@
 
 .errorMessage {
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-sm);
   color: var(--color-error-text);
 }
