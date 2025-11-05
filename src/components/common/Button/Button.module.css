@@ -28,6 +28,7 @@
 .variantPrimary {
   background: var(--color-accent);
   color: var(--color-white);
+  box-shadow: var(--shadow-button);
 }
 
 .variantPrimary:hover:not(:disabled) {
@@ -37,6 +38,7 @@
 .variantSolid {
   background: var(--color-accent);
   color: var(--color-white);
+  box-shadow: var(--shadow-button);
 }
 
 .variantSolid:hover:not(:disabled) {
@@ -47,6 +49,7 @@
   background: transparent;
   border-color: var(--color-border-strong);
   color: var(--color-text-primary);
+  box-shadow: var(--shadow-button);
 }
 
 .variantOutline:hover:not(:disabled) {
