@@ -1,5 +1,5 @@
-import { GeneratorFormContainer } from '@/components/forms/containers';
+import { CoverLetterFormContainer } from '@/components/forms/containers';
 
-const NewLetterPage = () => <GeneratorFormContainer />;
+const NewLetterPage = () => <CoverLetterFormContainer />;
 
 export default NewLetterPage;

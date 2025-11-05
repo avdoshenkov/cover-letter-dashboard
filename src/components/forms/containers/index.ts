@@ -1,1 +1,1 @@
-export { GeneratorFormContainer } from './GeneratorFormContainer';
+export { CoverLetterFormContainer } from './CoverLetterFormContainer';

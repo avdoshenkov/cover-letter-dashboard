@@ -1,13 +1,14 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
-import { useCoverLetterStore } from '@/store/coverLetters';
+import { selectLetterById, useCoverLetterStore } from '@/store/coverLetters';
 
 const MAX_CHARACTERS = 1200;
 
@@ -22,16 +23,39 @@ const schema = z.object({
     .or(z.literal(''))
 });
 
-const defaultValues: TCoverLetterFormInput = {
-  company: '',
-  jobTitle: '',
-  skills: '',
-  additionalDetails: ''
+export type TCoverLetterFormContainerProps = {
+  letterId?: string;
 };
 
-export const GeneratorFormContainer = () => {
-  const [generatedLetter, setGeneratedLetter] = useState<string>();
+export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainerProps) => {
+  const router = useRouter();
+  const letter = useCoverLetterStore(letterId ? selectLetterById(letterId) : () => undefined);
   const addLetter = useCoverLetterStore((state) => state.addLetter);
+  const updateLetter = useCoverLetterStore((state) => state.updateLetter);
+
+  const isEditMode = !!letterId;
+
+  // Set initial generated letter for edit mode
+  const [generatedLetter, setGeneratedLetter] = useState<string | undefined>(
+    isEditMode ? letter?.body : undefined
+  );
+
+  // Redirect if trying to edit non-existent letter
+  useEffect(() => {
+    if (isEditMode && !letter) {
+      router.push('/');
+    }
+  }, [isEditMode, letter, router]);
+
+  const defaultValues: TCoverLetterFormInput = useMemo(
+    () => ({
+      company: letter?.company || '',
+      jobTitle: letter?.jobTitle || '',
+      skills: letter?.skills || '',
+      additionalDetails: letter?.additionalDetails || ''
+    }),
+    [letter]
+  );
 
   const { register, handleSubmit, formState, control } = useForm<TCoverLetterFormInput>({
     defaultValues,
@@ -48,13 +72,14 @@ export const GeneratorFormContainer = () => {
     control,
     name: 'company'
   });
-  const isPlaceholderTitle = !jobTitle && !company;
 
   const additionalDetailsValue = useWatch({
     control,
     name: 'additionalDetails'
   });
   const characterCount = additionalDetailsValue?.length ?? 0;
+
+  const isPlaceholderTitle = !jobTitle && !company;
 
   const formTitle = useMemo(() => {
     if (isPlaceholderTitle) {
@@ -78,7 +103,12 @@ export const GeneratorFormContainer = () => {
 
     const body = await generateCoverLetter(payload);
     setGeneratedLetter(body);
-    addLetter(payload, body);
+
+    if (isEditMode && letterId) {
+      updateLetter(letterId, payload, body);
+    } else {
+      addLetter(payload, body);
+    }
   });
 
   const errorMessages = useMemo(
@@ -91,6 +121,11 @@ export const GeneratorFormContainer = () => {
     [formState.errors]
   );
 
+  // Don't render if trying to edit non-existent letter
+  if (isEditMode && !letter) {
+    return null;
+  }
+
   return (
     <GeneratorFormView
       onSubmit={onSubmit}
@@ -98,11 +133,11 @@ export const GeneratorFormContainer = () => {
       errors={errorMessages}
       isSubmitting={formState.isSubmitting}
       generatedLetter={generatedLetter}
-      isPlaceholderTitle={isPlaceholderTitle}
+      isPlaceholderTitle={!isEditMode && isPlaceholderTitle}
       characterCount={characterCount}
       maxCharacters={MAX_CHARACTERS}
       formTitle={formTitle}
-      submitButtonText="Generate Now"
+      submitButtonText={isEditMode ? 'Try Again' : 'Generate Now'}
     />
   );
 };

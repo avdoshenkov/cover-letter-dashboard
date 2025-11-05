@@ -12,6 +12,7 @@ type TCoverLetterState = {
   letters: TCoverLetter[];
   goalCount: number;
   addLetter: (input: TCoverLetterFormInput, body: string) => TCoverLetter;
+  updateLetter: (id: string, input: TCoverLetterFormInput, body: string) => void;
   removeLetter: (id: string) => void;
   clear: () => void;
 };
@@ -49,6 +50,25 @@ export const useCoverLetterStore = create<TCoverLetterState>()(
           set({ letters: [newLetter, ...get().letters] });
           return newLetter;
         },
+        updateLetter: (id, input, body) => {
+          const letters = get().letters;
+          const existingLetter = letters.find((letter) => letter.id === id);
+
+          if (!existingLetter) {
+            return;
+          }
+
+          const updatedLetter: TCoverLetter = {
+            ...existingLetter,
+            company: input.company,
+            jobTitle: input.jobTitle,
+            skills: input.skills,
+            additionalDetails: input.additionalDetails,
+            body
+          };
+
+          set({ letters: letters.map((letter) => (letter.id === id ? updatedLetter : letter)) });
+        },
         removeLetter: (id) => {
           set({ letters: get().letters.filter((letter) => letter.id !== id) });
         },
@@ -69,3 +89,7 @@ export const selectGoalCount = (state: TCoverLetterState) => state.goalCount;
 export const selectLettersCount = (state: TCoverLetterState) => state.letters.length;
 export const selectIsGoalReached = (state: TCoverLetterState) =>
   state.letters.length >= state.goalCount;
+
+// Selector to get a letter by id
+export const selectLetterById = (id: string) => (state: TCoverLetterState) =>
+  state.letters.find((letter) => letter.id === id);
