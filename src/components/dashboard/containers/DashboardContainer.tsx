@@ -11,8 +11,6 @@ import {
   useCoverLetterStore
 } from '@/store/coverLetters';
 
-type TClipboard = typeof navigator | undefined;
-
 export const DashboardContainer = () => {
   const router = useRouter();
   const letters = useCoverLetterStore(selectLetters);
@@ -22,21 +20,6 @@ export const DashboardContainer = () => {
   const removeLetter = useCoverLetterStore((state) => state.removeLetter);
 
   const progress = useMemo(() => ({ current, goal, reached }), [current, goal, reached]);
-
-  const handleCopy = useCallback(
-    async (id: string) => {
-      const target = letters.find((letter) => letter.id === id);
-      if (!target) {
-        return;
-      }
-
-      const clipboard: TClipboard = typeof navigator !== 'undefined' ? navigator : undefined;
-      if (clipboard?.clipboard) {
-        await clipboard.clipboard.writeText(target.body);
-      }
-    },
-    [letters]
-  );
 
   const handleDelete = useCallback(
     (id: string) => {
@@ -52,7 +35,6 @@ export const DashboardContainer = () => {
   return (
     <DashboardView
       letters={letters}
-      onCopy={handleCopy}
       onDelete={handleDelete}
       onCreate={handleCreate}
       progress={progress}

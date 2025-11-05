@@ -8,10 +8,8 @@ import { Button, PlusIcon, PageHeader } from '@/components/common';
 
 type TDashboardViewProps = {
   letters: TCoverLetter[];
-  onCopy: (id: string) => void;
   onDelete: (id: string) => void;
   onCreate: () => void;
-  onCardClick: (id: string) => void;
   progress: {
     current: number;
     goal: number;
@@ -19,14 +17,7 @@ type TDashboardViewProps = {
   };
 };
 
-export const DashboardView = ({
-  letters,
-  onCopy,
-  onDelete,
-  onCreate,
-  onCardClick,
-  progress
-}: TDashboardViewProps) => (
+export const DashboardView = ({ letters, onDelete, onCreate, progress }: TDashboardViewProps) => (
   <div className={styles.wrapper}>
     <PageHeader
       title="Applications"
@@ -40,13 +31,7 @@ export const DashboardView = ({
     {letters.length === 0 ? null : (
       <div className={styles.grid}>
         {letters.map((letter) => (
-          <CoverLetterCard
-            key={letter.id}
-            letter={letter}
-            onCopy={onCopy}
-            onDelete={onDelete}
-            onClick={() => onCardClick(letter.id)}
-          />
+          <CoverLetterCard key={letter.id} letter={letter} onDelete={onDelete} />
         ))}
       </div>
     )}
