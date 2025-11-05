@@ -11,6 +11,7 @@ import { TCoverLetterFormInput } from '@/types/coverLetter';
 import { selectLetterById, selectHasHydrated, useCoverLetterStore } from '@/store/coverLetters';
 import { Button } from '@/components/common';
 import { RepeatIcon } from '@/components/common/icons';
+import { usePreventNavigation } from './usePreventNavigation';
 
 const MAX_CHARACTERS = 1200;
 
@@ -62,6 +63,10 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
       resolver: zodResolver(schema),
       mode: 'onSubmit'
     });
+
+  usePreventNavigation({
+    shouldPrevent: formState.isDirty && !formState.isSubmitting
+  });
 
   // Update form values after store hydration in edit mode
   useEffect(() => {
