@@ -1,8 +1,8 @@
 'use client';
 
-import { FormEventHandler } from 'react';
+import { FormEventHandler, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { Button, CopyButton, PageHeader, TextField } from '@/components/common';
+import { CopyButton, PageHeader, TextField } from '@/components/common';
 import styles from './GeneratorFormView.module.css';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
 
@@ -15,8 +15,8 @@ export type TGeneratorFormViewProps = {
   characterCount: number;
   maxCharacters: number;
   formTitle: string;
-  submitButtonText: string;
   isPlaceholderTitle?: boolean;
+  submitButton: ReactNode;
 };
 
 export const GeneratorFormView = ({
@@ -29,7 +29,7 @@ export const GeneratorFormView = ({
   maxCharacters,
   formTitle,
   isPlaceholderTitle = false,
-  submitButtonText
+  submitButton
 }: TGeneratorFormViewProps) => {
   return (
     <div className={styles.wrapper}>
@@ -72,18 +72,7 @@ export const GeneratorFormView = ({
                 maxLength={maxCharacters}
               />
             </div>
-            <div className={styles.actions}>
-              <Button
-                type="submit"
-                loading={isSubmitting}
-                variant="primary"
-                size="lg"
-                fullWidth
-                loadingText="Generating…"
-              >
-                {submitButtonText}
-              </Button>
-            </div>
+            <div className={styles.actions}>{submitButton}</div>
           </form>
         </section>
         <section className={styles.previewCard}>

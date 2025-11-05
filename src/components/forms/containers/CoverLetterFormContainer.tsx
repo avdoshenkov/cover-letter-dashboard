@@ -9,6 +9,8 @@ import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
 import { selectLetterById, selectHasHydrated, useCoverLetterStore } from '@/store/coverLetters';
+import { Button } from '@/components/common';
+import { RepeatIcon } from '@/components/common/icons';
 
 const MAX_CHARACTERS = 1200;
 
@@ -139,6 +141,23 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
     return null;
   }
 
+  const submitButton = isEditMode ? (
+    <Button
+      type="submit"
+      loading={formState.isSubmitting}
+      variant="outline"
+      size="lg"
+      fullWidth
+      icon={<RepeatIcon />}
+    >
+      Try Again
+    </Button>
+  ) : (
+    <Button type="submit" loading={formState.isSubmitting} variant="primary" size="lg" fullWidth>
+      Generate Now
+    </Button>
+  );
+
   return (
     <GeneratorFormView
       onSubmit={onSubmit}
@@ -150,7 +169,7 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
       characterCount={characterCount}
       maxCharacters={MAX_CHARACTERS}
       formTitle={formTitle}
-      submitButtonText={isEditMode ? 'Try Again' : 'Generate Now'}
+      submitButton={submitButton}
     />
   );
 };

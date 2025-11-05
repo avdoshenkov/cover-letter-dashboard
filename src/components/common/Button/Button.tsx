@@ -41,7 +41,7 @@ export const Button = ({
   size = 'md',
   fullWidth = false,
   loading = false,
-  loadingText,
+  loadingText = '',
   disabled,
   type = 'button',
   className,
@@ -76,7 +76,7 @@ export const Button = ({
 
   const endIcon = !loading && icon && iconPlacement === 'end' ? renderIcon(icon) : null;
 
-  const labelContent = loading ? (loadingText ?? children) : children;
+  const labelContent = loading ? (loadingText !== undefined ? loadingText : children) : children;
 
   return (
     <button
