@@ -15,4 +15,8 @@
   .wrapper {
     padding: var(--spacing-lg) var(--spacing-md);
   }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

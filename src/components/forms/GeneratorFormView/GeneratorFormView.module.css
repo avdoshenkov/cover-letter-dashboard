@@ -64,3 +64,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 767px) {
+  .formFields {
+    grid-template-columns: 1fr;
+  }
+
+  .fullWidthField {
+    grid-column: span 1;
+  }
+}

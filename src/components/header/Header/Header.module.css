@@ -40,12 +40,3 @@
 .homeLink:hover {
   color: var(--color-text-primary);
 }
-
-@media (max-width: 768px) {
-  .header {
-    padding: var(--spacing-sm) var(--spacing-md);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-  }
-}

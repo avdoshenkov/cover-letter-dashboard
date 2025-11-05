@@ -7,14 +7,15 @@ export type THeaderProgressProps = {
   current: number;
   goal: number;
   reached: boolean;
+  className?: string;
 };
 
-export const HeaderProgress = ({ current, goal, reached }: THeaderProgressProps) => {
+export const HeaderProgress = ({ current, goal, reached, className }: THeaderProgressProps) => {
   const clampedCurrent = Math.min(current, goal);
   const label = `${clampedCurrent}/${goal} applications generated`;
 
   return (
-    <div className={styles.progress}>
+    <div className={`${styles.progress} ${className}`}>
       <span className={styles.label}>{label}</span>
       {reached ? (
         <CheckIcon />

@@ -28,7 +28,7 @@ export const Header = () => {
       <div className={styles.brand}>
         <Image src="/img/logo.svg" loading="eager" alt="Alt + Shift Logo" width={179} height={48} />
       </div>
-      <HeaderProgress current={current} goal={goal} reached={reached} />
+      <HeaderProgress className={styles.progress} current={current} goal={goal} reached={reached} />
       <Button variant="outline" icon={<HomeIcon />} onClick={handleHome} />
     </header>
   );
