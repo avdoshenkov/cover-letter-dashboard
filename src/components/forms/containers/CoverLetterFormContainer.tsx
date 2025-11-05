@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { GeneratorFormView } from '../GeneratorFormView';
 import { generateCoverLetter } from '@/services/generateCoverLetter';
 import { TCoverLetterFormInput } from '@/types/coverLetter';
-import { selectLetterById, useCoverLetterStore } from '@/store/coverLetters';
+import { selectLetterById, selectHasHydrated, useCoverLetterStore } from '@/store/coverLetters';
 
 const MAX_CHARACTERS = 1200;
 
@@ -20,7 +20,8 @@ const schema = z.object({
     .string()
     .max(MAX_CHARACTERS, 'Additional details must be 1200 characters or less')
     .optional()
-    .or(z.literal(''))
+    .or(z.literal('')),
+  body: z.string().optional()
 });
 
 export type TCoverLetterFormContainerProps = {
@@ -29,39 +30,49 @@ export type TCoverLetterFormContainerProps = {
 
 export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainerProps) => {
   const router = useRouter();
+  const hasHydrated = useCoverLetterStore(selectHasHydrated);
   const letter = useCoverLetterStore(letterId ? selectLetterById(letterId) : () => undefined);
   const addLetter = useCoverLetterStore((state) => state.addLetter);
   const updateLetter = useCoverLetterStore((state) => state.updateLetter);
 
   const isEditMode = !!letterId;
 
-  // Set initial generated letter for edit mode
-  const [generatedLetter, setGeneratedLetter] = useState<string | undefined>(
-    isEditMode ? letter?.body : undefined
-  );
-
-  // Redirect if trying to edit non-existent letter
   useEffect(() => {
-    if (isEditMode && !letter) {
+    if (hasHydrated && isEditMode && !letter) {
       router.push('/');
     }
-  }, [isEditMode, letter, router]);
+  }, [hasHydrated, isEditMode, letter, router]);
 
   const defaultValues: TCoverLetterFormInput = useMemo(
     () => ({
       company: letter?.company || '',
       jobTitle: letter?.jobTitle || '',
       skills: letter?.skills || '',
-      additionalDetails: letter?.additionalDetails || ''
+      additionalDetails: letter?.additionalDetails || '',
+      body: letter?.body || ''
     }),
     [letter]
   );
 
-  const { register, handleSubmit, formState, control } = useForm<TCoverLetterFormInput>({
-    defaultValues,
-    resolver: zodResolver(schema),
-    mode: 'onSubmit'
-  });
+  const { register, handleSubmit, formState, control, setValue, reset } =
+    useForm<TCoverLetterFormInput>({
+      defaultValues,
+      resolver: zodResolver(schema),
+      mode: 'onSubmit'
+    });
+
+  // Update form values after store hydration in edit mode
+  useEffect(() => {
+    if (hasHydrated && isEditMode && letter) {
+      reset({
+        company: letter.company,
+        jobTitle: letter.jobTitle,
+        skills: letter.skills,
+        additionalDetails: letter.additionalDetails || '',
+        body: letter.body || ''
+      });
+    }
+  }, [hasHydrated, isEditMode, letter, reset]);
 
   const jobTitle = useWatch({
     control,
@@ -79,6 +90,11 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
   });
   const characterCount = additionalDetailsValue?.length ?? 0;
 
+  const generatedLetter = useWatch({
+    control,
+    name: 'body'
+  });
+
   const isPlaceholderTitle = !jobTitle && !company;
 
   const formTitle = useMemo(() => {
@@ -92,17 +108,15 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
   }, [jobTitle, company, isPlaceholderTitle]);
 
   const onSubmit = handleSubmit(async (values) => {
-    const payload: TCoverLetterFormInput = {
+    const payload = {
       company: values.company.trim(),
       jobTitle: values.jobTitle.trim(),
       skills: values.skills.trim(),
-      additionalDetails: values.additionalDetails?.trim()
-        ? values.additionalDetails.trim()
-        : undefined
+      additionalDetails: values.additionalDetails?.trim() || undefined
     };
 
     const body = await generateCoverLetter(payload);
-    setGeneratedLetter(body);
+    setValue('body', body);
 
     if (isEditMode && letterId) {
       updateLetter(letterId, payload, body);
@@ -121,8 +135,7 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
     [formState.errors]
   );
 
-  // Don't render if trying to edit non-existent letter
-  if (isEditMode && !letter) {
+  if (hasHydrated && isEditMode && !letter) {
     return null;
   }
 

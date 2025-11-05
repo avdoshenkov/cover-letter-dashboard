@@ -11,4 +11,6 @@ export type TCoverLetter = {
 export type TCoverLetterFormInput = Pick<
   TCoverLetter,
   'company' | 'jobTitle' | 'skills' | 'additionalDetails'
->;
+> & {
+  body?: string;
+};
