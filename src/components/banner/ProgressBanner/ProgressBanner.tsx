@@ -1,13 +1,12 @@
 import styles from './ProgressBanner.module.css';
-import { Button, PlusIcon } from '@/components/common';
+import { CreateButton } from '@/components/common';
 
 export type TProgressBannerProps = {
   current: number;
   goal: number;
-  onCreate: () => void;
 };
 
-export const ProgressBanner = ({ current, goal, onCreate }: TProgressBannerProps) => {
+export const ProgressBanner = ({ current, goal }: TProgressBannerProps) => {
   const clampedCurrent = Math.min(current, goal);
 
   return (
@@ -18,15 +17,7 @@ export const ProgressBanner = ({ current, goal, onCreate }: TProgressBannerProps
           <p className={styles.description}>
             Generate and send out couple more job applications today to get hired faster
           </p>
-          <Button
-            type="button"
-            size="md"
-            icon={<PlusIcon />}
-            onClick={onCreate}
-            className={styles.cta}
-          >
-            Create new
-          </Button>
+          <CreateButton size="md" className={styles.cta} />
           <div className={styles.progress}>
             <div className={styles.steps} aria-hidden>
               {Array.from({ length: goal }).map((_, index) => (

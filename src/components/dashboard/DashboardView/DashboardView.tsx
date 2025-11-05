@@ -3,24 +3,16 @@
 import { CoverLetterCard } from '../CoverLetterCard';
 import styles from './DashboardView.module.css';
 import { TCoverLetter } from '@/types/coverLetter';
-import { Button, PlusIcon, PageHeader } from '@/components/common';
+import { CreateButton, PageHeader } from '@/components/common';
 
 type TDashboardViewProps = {
   letters: TCoverLetter[];
   onDelete: (id: string) => void;
-  onCreate: () => void;
 };
 
-export const DashboardView = ({ letters, onDelete, onCreate }: TDashboardViewProps) => (
+export const DashboardView = ({ letters, onDelete }: TDashboardViewProps) => (
   <div className={styles.wrapper}>
-    <PageHeader
-      title="Applications"
-      actions={
-        <Button type="button" size="sm" icon={<PlusIcon />} onClick={onCreate}>
-          Create new
-        </Button>
-      }
-    />
+    <PageHeader title="Applications" actions={<CreateButton size="sm" />} />
 
     {letters.length === 0 ? null : (
       <div className={styles.grid}>
