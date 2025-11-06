@@ -1,6 +1,7 @@
 'use client';
 
 import { forwardRef, TextareaHTMLAttributes, InputHTMLAttributes, ForwardedRef } from 'react';
+import { clsx } from 'clsx';
 import styles from './TextField.module.css';
 
 type TBaseProps = {
@@ -24,7 +25,7 @@ const TextFieldComponent = (
   { label, helper, error, counter, textarea, className, ...rest }: TTextFieldProps,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
 ) => (
-  <label className={[styles.field, className].filter(Boolean).join(' ')}>
+  <label className={clsx(styles.field, className)}>
     <div className={styles.labelRow}>
       <span className={styles.label}>{label}</span>
       {helper ? <span className={styles.helper}>{helper}</span> : null}
@@ -32,21 +33,19 @@ const TextFieldComponent = (
     {textarea ? (
       <textarea
         ref={ref as ForwardedRef<HTMLTextAreaElement>}
-        className={`${styles.textarea} ${error ? styles.errorState : ''}`.trim()}
+        className={clsx(styles.textarea, error && styles.errorState)}
         rows={9}
         {...(rest as TextareaHTMLAttributes<HTMLTextAreaElement>)}
       />
     ) : (
       <input
         ref={ref as ForwardedRef<HTMLInputElement>}
-        className={`${styles.input} ${error ? styles.errorState : ''}`.trim()}
+        className={clsx(styles.input, error && styles.errorState)}
         {...(rest as InputHTMLAttributes<HTMLInputElement>)}
       />
     )}
     {counter ? (
-      <span className={`${styles.counter} ${error ? styles.counterError : ''}`.trim()}>
-        {counter}
-      </span>
+      <span className={clsx(styles.counter, error && styles.counterError)}>{counter}</span>
     ) : null}
     {error ? (
       <span className={styles.errorMessage} role="alert">
