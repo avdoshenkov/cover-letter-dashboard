@@ -35,6 +35,11 @@
   box-shadow: var(--shadow-button);
 }
 
+.variantPrimary:disabled {
+  background: var(--color-border);
+  color: var(--color-text-disabled);
+}
+
 .variantSolid {
   background: var(--color-accent);
   color: var(--color-white);
