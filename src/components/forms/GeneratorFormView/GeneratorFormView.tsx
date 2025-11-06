@@ -37,21 +37,19 @@ export const GeneratorFormView = ({
         <section className={styles.formCard}>
           <PageHeader title={formTitle} isPlaceholder={isPlaceholderTitle} />
 
-          <form onSubmit={onSubmit} className={styles.form}>
+          <form onSubmit={onSubmit} className={styles.form} noValidate>
             <div className={styles.formFields}>
               <TextField
                 label="Job title"
                 placeholder="Product Designer"
                 error={errors.jobTitle}
                 {...register('jobTitle')}
-                required
               />
               <TextField
                 label="Company"
                 placeholder="Company name"
                 error={errors.company}
                 {...register('company')}
-                required
               />
               <TextField
                 className={styles.fullWidthField}
@@ -59,7 +57,6 @@ export const GeneratorFormView = ({
                 placeholder="UX Research, Interface Design, Prototyping"
                 error={errors.skills}
                 {...register('skills')}
-                required
               />
               <TextField
                 className={styles.fullWidthField}
@@ -69,7 +66,6 @@ export const GeneratorFormView = ({
                 {...register('additionalDetails')}
                 textarea
                 counter={`${characterCount}/${maxCharacters}`}
-                maxLength={maxCharacters}
               />
             </div>
             <div className={styles.actions}>{submitButton}</div>

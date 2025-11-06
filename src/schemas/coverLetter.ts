@@ -2,13 +2,15 @@ import { z } from 'zod';
 
 export const MAX_CHARACTERS = 1200;
 
+export const MAX_CHARACTERS_MESSAGE = `Additional details must be ${MAX_CHARACTERS} characters or less`;
+
 export const coverLetterInputSchema = z.object({
   company: z.string().min(1, 'Company is required'),
   jobTitle: z.string().min(1, 'Job title is required'),
   skills: z.string().min(1, 'Skills are required'),
   additionalDetails: z
     .string()
-    .max(MAX_CHARACTERS, 'Additional details must be 1200 characters or less')
+    .max(MAX_CHARACTERS, MAX_CHARACTERS_MESSAGE)
     .optional()
     .or(z.literal(''))
 });

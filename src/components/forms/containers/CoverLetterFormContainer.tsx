@@ -11,7 +11,11 @@ import { selectLetterById, selectHasHydrated, useCoverLetterStore } from '@/stor
 import { Button } from '@/components/common';
 import { RepeatIcon } from '@/components/common/icons';
 import { usePreventNavigation } from './usePreventNavigation';
-import { coverLetterFormSchema, MAX_CHARACTERS } from '@/schemas/coverLetter';
+import {
+  coverLetterFormSchema,
+  MAX_CHARACTERS,
+  MAX_CHARACTERS_MESSAGE
+} from '@/schemas/coverLetter';
 
 export type TCoverLetterFormContainerProps = {
   letterId?: string;
@@ -43,11 +47,12 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
     [letter]
   );
 
-  const { register, handleSubmit, formState, control, setValue, reset } =
+  const { register, handleSubmit, formState, control, setValue, reset, clearErrors } =
     useForm<TCoverLetterFormInput>({
       defaultValues,
       resolver: zodResolver(coverLetterFormSchema),
-      mode: 'onSubmit'
+      mode: 'onSubmit',
+      reValidateMode: 'onChange'
     });
 
   usePreventNavigation({
@@ -82,6 +87,13 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
     name: 'additionalDetails'
   });
   const characterCount = additionalDetailsValue?.length ?? 0;
+  const isAdditionalDetailsTooLong = characterCount > MAX_CHARACTERS;
+
+  useEffect(() => {
+    if (!isAdditionalDetailsTooLong) {
+      clearErrors('additionalDetails');
+    }
+  }, [isAdditionalDetailsTooLong, clearErrors]);
 
   const generatedLetter = useWatch({
     control,
@@ -127,15 +139,15 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
     }
   });
 
-  const errorMessages = useMemo(
-    () => ({
-      company: formState.errors.company?.message,
-      jobTitle: formState.errors.jobTitle?.message,
-      skills: formState.errors.skills?.message,
-      additionalDetails: formState.errors.additionalDetails?.message
-    }),
-    [formState.errors]
-  );
+  const errorMessages = {
+    company: formState.errors.company?.message,
+    jobTitle: formState.errors.jobTitle?.message,
+    skills: formState.errors.skills?.message,
+    additionalDetails: isAdditionalDetailsTooLong
+      ? MAX_CHARACTERS_MESSAGE
+      : formState.errors.additionalDetails?.message
+  };
+  const hasErrors = Object.values(errorMessages).some(Boolean);
 
   if (hasHydrated && isEditMode && !letter) {
     return null;
@@ -148,12 +160,20 @@ export const CoverLetterFormContainer = ({ letterId }: TCoverLetterFormContainer
       variant="outline"
       size="lg"
       fullWidth
+      disabled={hasErrors}
       icon={<RepeatIcon />}
     >
       Try Again
     </Button>
   ) : (
-    <Button type="submit" loading={formState.isSubmitting} variant="primary" size="lg" fullWidth>
+    <Button
+      type="submit"
+      loading={formState.isSubmitting}
+      variant="primary"
+      size="lg"
+      fullWidth
+      disabled={hasErrors}
+    >
       Generate Now
     </Button>
   );
