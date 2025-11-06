@@ -31,6 +31,11 @@
   color: var(--color-helper-text);
 }
 
+.counterError {
+  color: var(--color-error-text);
+  font-weight: var(--font-weight-medium);
+}
+
 .input,
 .textarea {
   width: 100%;

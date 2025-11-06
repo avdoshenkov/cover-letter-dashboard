@@ -43,7 +43,11 @@ const TextFieldComponent = (
         {...(rest as InputHTMLAttributes<HTMLInputElement>)}
       />
     )}
-    {counter ? <span className={styles.counter}>{counter}</span> : null}
+    {counter ? (
+      <span className={`${styles.counter} ${error ? styles.counterError : ''}`.trim()}>
+        {counter}
+      </span>
+    ) : null}
     {error ? <span className={styles.errorMessage}>{error}</span> : null}
   </label>
 );
