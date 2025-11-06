@@ -24,7 +24,7 @@ const TextFieldComponent = (
   { label, helper, error, counter, textarea, className, ...rest }: TTextFieldProps,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
 ) => (
-  <label className={`${styles.field} ${className}`}>
+  <label className={[styles.field, className].filter(Boolean).join(' ')}>
     <div className={styles.labelRow}>
       <span className={styles.label}>{label}</span>
       {helper ? <span className={styles.helper}>{helper}</span> : null}
@@ -48,7 +48,11 @@ const TextFieldComponent = (
         {counter}
       </span>
     ) : null}
-    {error ? <span className={styles.errorMessage}>{error}</span> : null}
+    {error ? (
+      <span className={styles.errorMessage} role="alert">
+        {error}
+      </span>
+    ) : null}
   </label>
 );
 
